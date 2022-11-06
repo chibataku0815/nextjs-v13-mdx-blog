@@ -1,0 +1,47 @@
+---
+title: "React Nativeで位置情報を取得する/パーミッション許可(expo-permissions)"
+categories: ["RaectNative"]
+tags: ['React', 'Expo', 'Tips']
+date: "2021-07-20"
+---
+
+### パッケージをインストール
+
+```
+expo install expo-permissions
+expo install expo-location
+```
+
+
+<iframe src="https://codesandbox.io/embed/github/chibataku0815/react-native-expo-location-example/tree/main/?autoresize=1&fontsize=14&hidenavigation=1&module=%2FApp.js&theme=dark&view=editor"
+  style={{
+    width: '100%',
+    height: '500px',
+    border: 0,
+    borderRadius: '4px',
+    overflow: 'hidden',
+  }}
+  title="react-native-expo-location-example"
+  allow="accelerometer; ambient-light-sensor; camera; encrypted-media; geolocation; gyroscope; hid; microphone; midi; payment; usb; vr; xr-spatial-tracking"
+  sandbox="allow-forms allow-modals allow-popups allow-presentation allow-same-origin allow-scripts"
+  loading='lazy'
+></iframe>
+
+` useEffect `で初回レンダリング時` Permissions.askAsync ` で得たステータスをステートフックに渡す
+
+### Permissions確認時のアラートにディスクリプション追加、または変更する
+
+iOSでは、Permissionsに許可を求める際にディスクリプションを記載しないといけないようなので、Expo にてその方法以下
+
+```
+"ios": {
+  "infoPlist": {
+    "NSLocationWhenInUseUsageDescription": "GPS Track Memoはアプリ内で取得した緯度と経度の配列を表示するために位置情報を利用します",
+    "UIBackgroundModes": [
+      "location"
+    ]
+  },
+},
+```
+
+` NSLocationWhenInUseUsageDescription ` に文言を記載する
