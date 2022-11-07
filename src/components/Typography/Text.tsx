@@ -7,7 +7,7 @@ import * as styles from './typography.css'
 const colorMap = {
   neutral: { lightMode: 'gray700', darkMode: 'stone500' },
   strong: { lightMode: 'gray900', darkMode: 'gray100' },
-  code: { lightMode: 'white' },
+  code: { lightMode: 'stone200' },
   link: { lightMode: 'stone800', darkMode: 'stone100' },
   secondary: { lightMode: 'gray500', darkMode: 'gray400' },
   highlight: { lightMode: 'pink500' },
@@ -19,6 +19,7 @@ interface TextStyleProps {
   weight?: keyof typeof styles.weight
   align?: Sprinkles['textAlign']
   baseline?: boolean
+  display?:  'block'
   type?: Exclude<keyof typeof styles.font, 'brand' | 'heading'>
 }
 
@@ -50,12 +51,13 @@ const Text = ({
   align,
   baseline = false,
   type,
+  display,
   children,
 }: TextProps) => {
   return (
     <Box
       component={component}
-      display="block"
+      display={display}
       className={TextStyles({ size, color, weight, type, align, baseline })}
     >
       {children}

@@ -8,24 +8,58 @@ date: "2021-07-22"
 
 ### パッケージをインストール
 
-```
+```bash
 expo install expo-permissions
 expo install expo-location
 ```
 
-<iframe src="https://codesandbox.io/embed/github/chibataku0815/react-native-expo-location-example/tree/main/?autoresize=1&fontsize=14&hidenavigation=1&module=%2FApp.js&theme=dark&view=editor"
-    style={{
-    width: '100%',
-    height: '500px',
-    border: 0,
-    borderRadius: '4px',
-    overflow: 'hidden',
-  }}
-  title="react-native-expo-location-example"
-  allow="accelerometer; ambient-light-sensor; camera; encrypted-media; geolocation; gyroscope; hid; microphone; midi; payment; usb; vr; xr-spatial-tracking"
-  sandbox="allow-forms allow-modals allow-popups allow-presentation allow-same-origin allow-scripts"
-  loading='lazy'
-   ></iframe>
+```jsx
+import * as Location from 'expo-location';
+import * as Permissions from 'expo-permissions';
+import { StatusBar } from 'expo-status-bar';
+import React, { useEffect, useState } from 'react';
+import { StyleSheet, View } from 'react-native';
+
+export default function App() {
+
+  const [locationPermission, setLocationPermission] = useState(false)
+  const [isCoords, setCoords] = useState()
+
+  useEffect(() => {
+    const getLocationPermissions = async () => {
+      let { status } = await Permissions.askAsync( Permissions.LOCATION )
+      if ( 'granted' === status ) {
+        await setLocationPermission( true );
+        let { coords: { latitude, longitude } } = await Location.getCurrentPositionAsync({})
+        setCoords({ latitude, longitude })
+      }
+    }
+    getLocationPermissions()
+  }, [])
+
+  return (
+    <View style={styles.container}>
+      <p>
+        {locationPermission ? '位置情報へのアクセス許可されました' : '位置情報へのアクセス許可が拒否されました'}
+      </p>
+      <p>
+        座標 {JSON.stringify(isCoords)}
+      </p>
+      <StatusBar style="auto" />
+    </View>
+  );
+}
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    backgroundColor: '#fff',
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+});
+
+```
 
 ----
 
@@ -33,7 +67,7 @@ expo install expo-location
 
 ### 位置情報の取得をバックグラウンド実行
 
-```
+```json
 //app.json
   "ios": {
       "infoPlist": {

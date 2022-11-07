@@ -1,6 +1,6 @@
+import { CMS_NAME } from '@/lib/constants'
 import Head from 'next/head'
 import Script from 'next/script'
-import { CMS_NAME } from '@/lib/constants'
 
 const Meta = () => {
   return (

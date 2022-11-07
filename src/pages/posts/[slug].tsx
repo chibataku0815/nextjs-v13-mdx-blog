@@ -8,6 +8,7 @@ import { Heading } from '@/components/Typography/Heading'
 import Text from '@/components/Typography/Text'
 import { PostMeta } from '@/interface/post'
 import { getPostFromSlug, getSlugs } from '@/lib/api'
+import "highlight.js/styles/tokyo-night-dark.css"
 import { GetStaticPaths, GetStaticProps } from 'next'
 import { MDXRemoteSerializeResult } from 'next-mdx-remote'
 import { serialize } from 'next-mdx-remote/serialize'
@@ -80,7 +81,8 @@ export default function Post({ source, meta }: MDXPost) {
         {router.isFallback ? (
           <PostTitle>Loading…</PostTitle>
         ) : (
-          <Box padding={{ desktop: "xlarge" }}>
+            <Box padding={{ desktop: "xlarge" }}>
+              {/* <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/water.css@2/out/dark.css"></link> */}
             <MDX source={source} />
           </Box>
         )}

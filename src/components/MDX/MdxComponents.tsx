@@ -61,6 +61,10 @@ export const mdxComponents = {
       </RemoveNestedParagraphs>
     </Block>
   ),
+  code: (props: { children?: ReactNode }) => (
+    <Block component="code" className='hljs'  borderRadius={'small'}>
+      <Text color='code' size='code'>{props.children}</Text>
+    </Block>),
   th: (props: { children?: ReactNode }) => (<Text component="th" weight="strong">
     {props.children}
   </Text>),

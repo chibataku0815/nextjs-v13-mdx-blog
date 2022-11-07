@@ -282,15 +282,15 @@ export const vars = createGlobalTheme(':root', {
     code: calculateTypographyStyles(
       {
         mobile: {
-          fontSize: 13,
+          fontSize: 11,
           rows: 6,
         },
         tablet: {
-          fontSize: 14,
+          fontSize: 12,
           rows: 7,
         },
         desktop: {
-          fontSize: 14,
+          fontSize: 12,
           rows: 7,
         },
       },
